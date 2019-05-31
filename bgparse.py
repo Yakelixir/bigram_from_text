@@ -1,14 +1,9 @@
 #! /usr/bin/env python
 
-"""A script to parse text files """
+"""A script to parse text files for bigrams
+   maybe n-grams in the future"""
 
-# Generate bigrams out of the new spaced string
-def file_text(file):
-    """Load a file and return the raw text"""
-
-    f = open(file)
-    text = f.read()
-    return text
+# Playing with nltk internals and writing something that is more "generic"
 
 def ntlk_parse(data):
 
@@ -26,18 +21,11 @@ def ntlk_parse(data):
 
     return fdist
 
-def parse_bigrams(data, seperator=' '):
+def bigram_parse(data):
     """Parse strings into """
 
     from collections import Counter
 
-    input_list = data.split(seperator)
+    input_list = data.split(' ')
     bigrams = zip(input_list, input_list[1:])
     print(bigrams)
-
-
-if __name__ == '__main__':
-
-    SAMPLE = 'The quick brown fox and the quick blue hare.'
-    ntlk_parse(SAMPLE)
-    parse_bigrams(SAMPLE)

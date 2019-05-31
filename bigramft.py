@@ -11,7 +11,6 @@ RUN SCRIPTS
 """
 
 import argparse
-import sys
 
 
 def cmd_line_input():
@@ -21,7 +20,7 @@ def cmd_line_input():
     help_msg = """
     usage: bigramft.py [-h] [-u] [-f]
 
-    A program to update components on servers.
+    A program to check text from files for bigrams.
 
     optional arguments:
     ####Args#########Output#####Desc####
@@ -56,17 +55,28 @@ def cmd_line_input():
     return parser.parse_args()
 
 
-# Try running with these args
-#
-# "Hello" 123 --enable
+def file_text(file):
+    """Load a file
+       Call nltk_parse on the raw text"""
+
+    file_output = open(file)
+    text = file_output.read()
+    nltk_parse(text)
+
 if __name__ == '__main__':
 
-    if sys.version_info < (3, 0, 0):
-        sys.stderr.write("You need python 3.0 or later to run this script\n")
-        sys.exit(1)
-
     try:
-        ARGS = cmd_line_input()
-        print(ARGS)
-    except:
-        print('Plese see the help message for usage tips')
+        from bgparse import nltk_parse, bigram_parse
+        #ARGS = cmd_line_input()
+        #ARGS_FILE_PATH = ARGS.file
+        #print(ARGS)
+
+        FPATH = '/Users/truth/PycharmProjects/Bigram_from_text/bigram_from_text/files/sample.txt'
+        SAMPLE = 'The quick brown fox and the quick blue hare.'
+        file_text(FPATH)
+        nltk_parse(SAMPLE)
+        parse_bigrams(SAMPLE)
+        file_text(FPATH)
+        #file_text(ARGS_FILE_PATH)
+    except Exception as error:
+        print(error, '\n', 'Plese see the help message for usage tips')
