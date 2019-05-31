@@ -2,42 +2,42 @@
 
 """A script to parse text files """
 
-from nltk.probability import FreqDist
-import Counter
-
-#from collections import Counter
-#from nltk.corpus import brown
-
-
-
 # Generate bigrams out of the new spaced string
-def load_file():
-    """How we load a file for parsing"""
+def file_text(file):
+    """Load a file and return the raw text"""
 
-def ntlk_parse():
+    f = open(file)
+    text = f.read()
+    return text
 
-    """Paring with a pure nltk approach"""
+def ntlk_parse(data):
 
-    from nltk.tokenize import word_tokenize
-    sent = 'This is an example sentence'
-    fdist = FreqDist()
-    for word in word_tokenize(sent):
-        fdist[word.lower()] += 1
-    # An equivalent way to do this is with the initializer:
+    """Parsing with a pure nltk approach"""
 
-    fdist = FreqDist(word.lower() for word in word_tokenize(sent))
+    from nltk import word_tokenize, bigrams, FreqDist
+
+    tokens = word_tokenize(data.lower())
+    print(tokens)
+    bigrams = bigrams(tokens)
+    fdist = FreqDist(bigrams)
+    print(fdist.items)
+    for wrd, cnt in fdist.items():
+        print(wrd, ', ', cnt)
+
+    return fdist
 
 def parse_bigrams(data, seperator=' '):
     """Parse strings into """
 
-    #<set filter here?>
+    from collections import Counter
 
     input_list = data.split(seperator)
-    return zip(input_list, input_list[1:])
+    bigrams = zip(input_list, input_list[1:])
+    print(bigrams)
 
 
 if __name__ == '__main__':
 
     SAMPLE = 'The quick brown fox and the quick blue hare.'
-    TOKEN_FREQ = FreqDist(parse_bigrams(SAMPLE))
-    print(TOKEN_FREQ)
+    ntlk_parse(SAMPLE)
+    parse_bigrams(SAMPLE)
