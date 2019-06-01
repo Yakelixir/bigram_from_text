@@ -65,7 +65,10 @@ def file_text(files):
         for file in files:
             file_output = open(file)
             text = file_output.read()
-            bgparse.nltk_parse(bgparse.filter_punkt(text))
+            no_punkt_text = bgparse.filter_punkt(text)
+            bgparse.nltk_parse(no_punkt_text)
+            bgparse.bigram_parse(no_punkt_text)
+
     except Exception as error:
         print(error)
 

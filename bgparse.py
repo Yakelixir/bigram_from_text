@@ -15,7 +15,7 @@ def nltk_parse(data):
     bigrams = bigrams(tokens)
     fdist = FreqDist(bigrams)
     for result, cnt in fdist.items():
-        print(result, ', ', cnt)
+        print(result, cnt)
 
     return fdist
 
@@ -39,6 +39,7 @@ def filter_punkt(raw_data):
        filter out punctuation"""
 
     import string
-    new_str = raw_data.lower().translate(str.maketrans('', '', string.punctuation))
+    lower_str = raw_data.lower()
+    new_str = lower_str.translate(str.maketrans('', '', string.punctuation))
 
     return new_str
