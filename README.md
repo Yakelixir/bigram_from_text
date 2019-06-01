@@ -11,7 +11,15 @@ Set up permissions to install.
 
 This will check for python3, setup a virtualenv, and install dependancies through pip. This will then run bigram_setup.py
 
-3. You should be ready for beer and pixie sticks now
+3. source $PWD/nltk_vrtenv/bin/activate or source <path>/nltk_vrtenv/bin/activate
+
+Actiavte the virtual environment
+
+4. ./nltk_setup.py
+
+This will run nltk.download('all') which is recomended for setup
+
+4. You should be ready for beer and pixie sticks now
 
 
 

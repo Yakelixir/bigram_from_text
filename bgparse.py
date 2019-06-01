@@ -5,7 +5,7 @@
 
 # Playing with nltk internals and writing something that is more "generic"
 
-def ntlk_parse(data):
+def nltk_parse(data):
 
     """Parsing with a pure nltk approach"""
 
@@ -30,3 +30,6 @@ def bigram_parse(data):
     input_list = data.split(' ')
     bigrams = zip(input_list, input_list[1:])
     print(bigrams)
+
+def filter_punkt():
+    """filter for punctuation"""

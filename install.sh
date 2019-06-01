@@ -21,7 +21,7 @@ if [[ $userInput == 'Y' ]]; then
             echo BUILD: Running pip to install requirements
             pip install -r $PWD/config/requirements.txt
             chmod +x nltk_setup.py
-            python3 nltk_setup.py
+            ./nltk_setup.py
         else
             echo Virtualenv is not setup. Please install this and attempt this once that is completed
             exit 1

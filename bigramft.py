@@ -61,12 +61,12 @@ def file_text(file):
 
     file_output = open(file)
     text = file_output.read()
-    nltk_parse(text)
+    bgparse.nltk_parse(text)
 
 if __name__ == '__main__':
 
     try:
-        from bgparse import nltk_parse, bigram_parse
+        import bgparse
         #ARGS = cmd_line_input()
         #ARGS_FILE_PATH = ARGS.file
         #print(ARGS)
@@ -74,8 +74,8 @@ if __name__ == '__main__':
         FPATH = '/Users/truth/PycharmProjects/Bigram_from_text/bigram_from_text/files/sample.txt'
         SAMPLE = 'The quick brown fox and the quick blue hare.'
         file_text(FPATH)
-        nltk_parse(SAMPLE)
-        parse_bigrams(SAMPLE)
+        bgparse.nltk_parse(SAMPLE)
+        bgparse.bigram_parse(SAMPLE)
         file_text(FPATH)
         #file_text(ARGS_FILE_PATH)
     except Exception as error:
