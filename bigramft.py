@@ -55,29 +55,26 @@ def cmd_line_input():
     return parser.parse_args()
 
 
-def file_text(file):
+def file_text(files):
     """Load a file
        Call nltk_parse on the raw text"""
 
-    file_output = open(file)
-    text = file_output.read()
-    bgparse.nltk_parse(bgparse.filter_punkt(text))
+    try:
+        for file in files:
+            file_output = open(file)
+            text = file_output.read()
+            bgparse.nltk_parse(bgparse.filter_punkt(text))
+    except Exception as error:
+        print(error)
 
 if __name__ == '__main__':
 
     try:
         import bgparse
         import string
-        #ARGS = cmd_line_input()
-        #ARGS_FILE_PATH = ARGS.file
-        #print(ARGS)
 
-        FPATH = '/Users/truth/PycharmProjects/Bigram_from_text/bigram_from_text/files/sample.txt'
-        SAMPLE = bgparse.filter_punkt('The quick brown fox and the quick blue hare.')
-        file_text(FPATH)
-        bgparse.nltk_parse(SAMPLE)
-        bgparse.bigram_parse(SAMPLE)
-        file_text(FPATH)
-        #file_text(ARGS_FILE_PATH)
+        ARGS = cmd_line_input()
+        ARGS_FILE_PATH = ARGS.file
+        file_text(ARGS_FILE_PATH)
     except Exception as error:
         print(error, '\n', 'Plese see the help message for usage tips')
