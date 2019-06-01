@@ -20,10 +20,11 @@ def nltk_parse(data):
     return fdist
 
 def bigram_parse(data):
-    """Parse strings into """
+
+    """Parse strings into bigrams without nltk
+       """
 
     from collections import Counter
-    # work needed with counter
 
     input_list = data.split(' ')
     bigrams = zip(input_list, input_list[1:])

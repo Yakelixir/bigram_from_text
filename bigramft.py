@@ -40,22 +40,23 @@ def cmd_line_input():
                         action='help',
                         default=argparse.SUPPRESS,
                         help=help_msg
-                       )
+                        )
     parser.add_argument("-f",
                         "--file",
                         nargs='+',
                         help='set a file target ex. -f path/file.txt path/file2.txt etc'
-                       )
+                        )
     parser.add_argument("-u",
                         "--url",
                         nargs='+',
                         help='set a url target ex. -u google.com somesite.com etc'
-                       )
+                        )
 
     return parser.parse_args()
 
 
 def file_text(files):
+
     """Load a file
        Filter punctuation
        Call nltk_parse on the raw text
