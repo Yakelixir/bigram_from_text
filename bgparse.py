@@ -36,6 +36,7 @@ def bigram_parse(data):
     return count
 
 def filter_punkt(raw_data):
+
     """apply lower case
        filter out punctuation"""
 
