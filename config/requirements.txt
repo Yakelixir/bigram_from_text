@@ -2,6 +2,7 @@
 requests
 nltk
 Counter
+string
 
 
 ###### Requirements with Version Specifiers ######

@@ -27,9 +27,19 @@ def bigram_parse(data):
     from collections import Counter
     # work needed with counter
 
-    input_list = data.split(' ')
+    input_list = data.lower().split(' ')
     bigrams = zip(input_list, input_list[1:])
-    print(bigrams)
+    count = Counter()
+    for element in bigrams:
+        count[element] += 1
+    print(count)
 
-def filter_punkt():
+    return count
+
+def filter_punkt(raw_data):
     """filter for punctuation"""
+
+    import string
+    new_str = raw_data.translate(str.maketrans('', '', string.punctuation))
+
+    return new_str

@@ -61,18 +61,19 @@ def file_text(file):
 
     file_output = open(file)
     text = file_output.read()
-    bgparse.nltk_parse(text)
+    bgparse.nltk_parse(bgparse.filter_punkt(text))
 
 if __name__ == '__main__':
 
     try:
         import bgparse
+        import string
         #ARGS = cmd_line_input()
         #ARGS_FILE_PATH = ARGS.file
         #print(ARGS)
 
         FPATH = '/Users/truth/PycharmProjects/Bigram_from_text/bigram_from_text/files/sample.txt'
-        SAMPLE = 'The quick brown fox and the quick blue hare.'
+        SAMPLE = bgparse.filter_punkt('The quick brown fox and the quick blue hare.')
         file_text(FPATH)
         bgparse.nltk_parse(SAMPLE)
         bgparse.bigram_parse(SAMPLE)
