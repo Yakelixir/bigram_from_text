@@ -11,13 +11,11 @@ def nltk_parse(data):
 
     from nltk import word_tokenize, bigrams, FreqDist
 
-    tokens = word_tokenize(data.lower())
-    print(tokens)
+    tokens = word_tokenize(data)
     bigrams = bigrams(tokens)
     fdist = FreqDist(bigrams)
-    print(fdist.items)
-    for wrd, cnt in fdist.items():
-        print(wrd, ', ', cnt)
+    for result, cnt in fdist.items():
+        print(result, ', ', cnt)
 
     return fdist
 
@@ -27,7 +25,7 @@ def bigram_parse(data):
     from collections import Counter
     # work needed with counter
 
-    input_list = data.lower().split(' ')
+    input_list = data.split(' ')
     bigrams = zip(input_list, input_list[1:])
     count = Counter()
     for element in bigrams:
@@ -37,9 +35,10 @@ def bigram_parse(data):
     return count
 
 def filter_punkt(raw_data):
-    """filter for punctuation"""
+    """apply lower case
+       filter out punctuation"""
 
     import string
-    new_str = raw_data.translate(str.maketrans('', '', string.punctuation))
+    new_str = raw_data.lower().translate(str.maketrans('', '', string.punctuation))
 
     return new_str

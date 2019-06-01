@@ -57,7 +57,9 @@ def cmd_line_input():
 
 def file_text(files):
     """Load a file
-       Call nltk_parse on the raw text"""
+       Filter punctuation
+       Call nltk_parse on the raw text
+       How do we want to handle this for input"""
 
     try:
         for file in files:
