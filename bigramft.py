@@ -36,7 +36,7 @@ def cmd_line_input():
     required arguments:
     ::::Args:::::::::Output:::::Desc::::
 
-        -f, --file   list       file location that we should target     
+        -f, --file   list       file location that we should target
                """
 
     parser = argparse.ArgumentParser(description='Comand line parse for input options',
@@ -51,7 +51,7 @@ def cmd_line_input():
                         "--files",
                         nargs='+',
                         required=True,  # required for now
-                        help="""set a file target ex. 
+                        help="""set a file target ex.
                         -f path/file.txt path/file2.txt etc
                         You can set one or as many as you like"""
                         )
@@ -66,7 +66,7 @@ def cmd_line_input():
     return parser.parse_args()
 
 
-def file_text(files):
+def file_to_grams(files):
 
     """
     Load a file
@@ -82,17 +82,32 @@ def file_text(files):
         try:
             text = open(file).read()
             if isinstance(text, str):
-                no_punkt_text = bgparse.filter_punkt(text)
-                bgparse.nltk_parse(no_punkt_text)
-                bgparse.bigram_parse(no_punkt_text)
+                no_punct_text = bgparse.filter_punkt(text)
+                nice_print(bgparse.nltk_parse(no_punct_text))
+                nice_print(bgparse.bigram_parse(no_punct_text))
             else:
                 pass
         except Exception as error:
-            print('something went wrong', end=' ')
+            print('something went wrong reading your file', end='')
             print(error)
             pass
         # except UnicodeEncodeError as error:
         #     print(error)
+
+def nice_print(results):
+
+    """
+    print it nice and neat
+
+    :dict required:
+
+    structure:
+    <word> <word>, freq
+    """
+
+    for result, freq in results.items():
+        print(f'"{result[0]} {result[1]}", {freq}')
+    print()
 
 
 if __name__ == '__main__':
@@ -101,6 +116,6 @@ if __name__ == '__main__':
         import bgparse
 
         ARGS = cmd_line_input()
-        file_text(ARGS.files)
+        file_to_grams(ARGS.files)
     except Exception as error:
         print(__name__, error, '\n', 'Plese see the help message for usage tips')

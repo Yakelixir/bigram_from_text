@@ -20,8 +20,6 @@ def nltk_parse(data):
     tokens = word_tokenize(data)
     bigrams = bigrams(tokens)
     fdist = FreqDist(bigrams)
-    for result, cnt in fdist.items():
-        print(result, cnt)
 
     return fdist
 

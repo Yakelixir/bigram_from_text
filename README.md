@@ -25,24 +25,46 @@ This will run nltk.download('all') which is recomended for setup
 
 RUNNING
 
-1. To be determined!!!
+1. 
+
+Argparse ineraction as in
+
 
 
 DEVELOPMENT NOTES
 
-    """Notes for Development:
-    Get this stable in MVP form
-    * Something to collect text and make files
-    * Argparse for CLI
-    ** target
-    *** url to make files
-    *** file location
-    * Input from file.txt
-    ** ANY text file translates to?
-    *** What are the text file types?
-    * A place to store data
+    """
+    
+    usage: bigramft.py [-h] [-u] [-f]
+    required: text files
+
+    A program to check text from files for bigrams and count distribution.
+
+    optional arguments:
+    ::::Args:::::::::Output:::::Desc::::
+    
+        -h, --help   str        show this help message and exit
+        -u, --url    list       supply a single or several url(s) for requests.get() to target
+
+        >>> -u 'google.com' 'gohealth.com' ...
+        
+    required arguments:
+    ::::Args:::::::::Output:::::Desc::::
+
+        -f, --file   list       file location that we should target
+    
+   
+   
+   
+    
+    Notes for Development:
+    Get this stable in MVP form                             [done]
+    * Something to collect text and make files              [fut]
+    * Argparse for CLI                                      [done]
+        * File location required
+    * A place to store data                                 [fut]
     ** How do we want to store this?
-    * Parsing
+    * Parsing                                               [done]
     ** USE NLTK internal vs regex!!
     ** Corpus ->
     ** Entry ->
@@ -50,13 +72,8 @@ DEVELOPMENT NOTES
     ** Paragraph ->
     ** Sentence ->
     ** Word ->
-    
-    * Histogram output
-    
-    """
-    
-    """
-    Future Work:
-    Conncurrency of Requests -> Factory Processing Line
-    Parsing seperator in args
+    * Histogram output                                      [done]
+    * Conncurrency of Requests -> Factory Processing Line     [    ]
+    * Generator usage for processing line / croutines         [    ]
+    * Parsing seperator in args                               [    ]
     """
