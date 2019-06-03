@@ -75,8 +75,8 @@ def filter_punkt(raw_data):
     import string
     lower_str = raw_data.lower()
     special_char = '\u200e'
-    punct = string.punctuation.append(special_char)
+    punct = string.punctuation
 
-    new_str = lower_str.translate(str.maketrans('', '', punct))
+    new_str = lower_str.translate(str.maketrans('', '', punct)).replace(special_char, '')
 
     return new_str
