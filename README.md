@@ -25,9 +25,9 @@ This will run nltk.download('all') which is recomended for setup
 
 RUNNING
 
-1. 
+1. python3 bigramft.py -f <file_path>
 
-Argparse ineraction as in
+Argparse ineraction [-f required]
 
 
 
@@ -42,7 +42,7 @@ DEVELOPMENT NOTES
 
     optional arguments:
     ::::Args:::::::::Output:::::Desc::::
-    
+    we                  a
         -h, --help   str        show this help message and exit
         -u, --url    list       supply a single or several url(s) for requests.get() to target
 

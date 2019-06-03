@@ -118,4 +118,4 @@ if __name__ == '__main__':
         ARGS = cmd_line_input()
         file_to_grams(ARGS.files)
     except Exception as error:
-        print(__name__, error, '\n', 'Plese see the help message for usage tips')
+        print(error, '\n', 'Plese see the help message for usage tips')
