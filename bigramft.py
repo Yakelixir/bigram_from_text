@@ -15,7 +15,9 @@ import argparse
 
 def cmd_line_input():
 
-    """command line interface for input"""
+    """
+    command line interface for input
+    """
 
     help_msg = """
     usage: bigramft.py [-h] [-u] [-f]
@@ -24,11 +26,15 @@ def cmd_line_input():
     A program to check text from files for bigrams and count distribution.
 
     optional arguments:
-    ####Args#########Output#####Desc####
+    ::::Args:::::::::Output:::::Desc::::
+    
         -h, --help   str        show this help message and exit
         -u, --url    list       supply a single or several url(s) for requests.get() to target
 
-        >>> -u 'google.com' 'gohealth.com' ...               
+        >>> -u 'google.com' 'gohealth.com' ...
+        
+    required arguments:
+    ::::Args:::::::::Output:::::Desc::::
 
         -f, --file   list       file location that we should target     
                """
@@ -39,7 +45,6 @@ def cmd_line_input():
     parser.add_argument('-h',
                         '--help',
                         action='help',
-                        default=argparse.SUPPRESS,
                         help=help_msg
                         )
     parser.add_argument("-f",

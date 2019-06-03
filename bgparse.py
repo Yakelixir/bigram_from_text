@@ -39,7 +39,6 @@ def bigram_parse(data):
     count = Counter()
     for element in bigrams:
         count[element] += 1
-    print(count)
 
     return count
 
