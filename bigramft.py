@@ -63,26 +63,28 @@ def cmd_line_input():
 
 def file_text(files):
 
-    """Load a file
-       Filter punctuation
-       Call nltk_parse on the raw text
-       How do we want to handle this for input"""
+    """
+    Load a file
+    Filter punctuation
+    Call nltk_parse on the raw text
+    How do we want to handle this for input
+    """
 
     for file in files:
-        # possible split here to conncurency considerations
-        # noticable behavior difference when handling
+        # possible split here to conncurency considerations (FUTURE)
+        # noticable behavior difference when handling LTR (INVESTIGATING)
 
         try:
             text = open(file).read()
-            print(text)
-            if isinstance(file, str):
+            if isinstance(text, str):
                 no_punkt_text = bgparse.filter_punkt(text)
                 bgparse.nltk_parse(no_punkt_text)
                 bgparse.bigram_parse(no_punkt_text)
             else:
                 pass
-        except:
-            print('something went wrong')
+        except Exception as error:
+            print('something went wrong', end=' ')
+            print(error)
             pass
         # except UnicodeEncodeError as error:
         #     print(error)
@@ -92,7 +94,6 @@ if __name__ == '__main__':
 
     try:
         import bgparse
-        import string
 
         ARGS = cmd_line_input()
         file_text(ARGS.files)
