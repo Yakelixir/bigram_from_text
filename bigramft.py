@@ -19,8 +19,9 @@ def cmd_line_input():
 
     help_msg = """
     usage: bigramft.py [-h] [-u] [-f]
+    required: text files
 
-    A program to check text from files for bigrams.
+    A program to check text from files for bigrams and count distribution.
 
     optional arguments:
     ####Args#########Output#####Desc####
@@ -30,7 +31,7 @@ def cmd_line_input():
         >>> -u 'google.com' 'gohealth.com' ...               
 
         -f, --file   list       file location that we should target     
-        """
+               """
 
     parser = argparse.ArgumentParser(description='Comand line parse for input options',
                                      add_help=False)
@@ -42,14 +43,19 @@ def cmd_line_input():
                         help=help_msg
                         )
     parser.add_argument("-f",
-                        "--file",
+                        "--files",
                         nargs='+',
-                        help='set a file target ex. -f path/file.txt path/file2.txt etc'
+                        required=True,  # required for now
+                        help="""set a file target ex. 
+                        -f path/file.txt path/file2.txt etc
+                        You can set one or as many as you like"""
                         )
     parser.add_argument("-u",
                         "--url",
                         nargs='+',
-                        help='set a url target ex. -u google.com somesite.com etc'
+                        help="""set a url target ex.
+                        -u google.com somesite.com etc
+                        You can set one or as many as you like"""
                         )
 
     return parser.parse_args()
@@ -62,16 +68,25 @@ def file_text(files):
        Call nltk_parse on the raw text
        How do we want to handle this for input"""
 
-    try:
-        for file in files:
-            file_output = open(file)
-            text = file_output.read()
-            no_punkt_text = bgparse.filter_punkt(text)
-            bgparse.nltk_parse(no_punkt_text)
-            bgparse.bigram_parse(no_punkt_text)
+    for file in files:
+        # possible split here to conncurency considerations
+        # noticable behavior difference when handling
 
-    except Exception as error:
-        print(error)
+        try:
+            text = open(file).read()
+            print(text)
+            if isinstance(file, str):
+                no_punkt_text = bgparse.filter_punkt(text)
+                bgparse.nltk_parse(no_punkt_text)
+                bgparse.bigram_parse(no_punkt_text)
+            else:
+                pass
+        except:
+            print('something went wrong')
+            pass
+        # except UnicodeEncodeError as error:
+        #     print(error)
+
 
 if __name__ == '__main__':
 
@@ -80,7 +95,6 @@ if __name__ == '__main__':
         import string
 
         ARGS = cmd_line_input()
-        ARGS_FILE_PATH = ARGS.file
-        file_text(ARGS_FILE_PATH)
+        file_text(ARGS.files)
     except Exception as error:
-        print(error, '\n', 'Plese see the help message for usage tips')
+        print(__name__, error, '\n', 'Plese see the help message for usage tips')
