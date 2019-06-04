@@ -119,10 +119,10 @@ if __name__ == '__main__':
 
         NO_PUNCT = bgparse.filter_punkt_lower(TEXT)
         NLTK_RETURN = bgparse.nltk_parse(NO_PUNCT)
-        NON_NLTK_RETURN = bgparse.bigram_parse(NO_PUNCT)
+        # NON_NLTK_RETURN = bgparse.bigram_parse(NO_PUNCT)
 
         nice_print(NLTK_RETURN)
-        nice_print(NON_NLTK_RETURN)
+        # nice_print(NON_NLTK_RETURN)
 
     except Exception as error:
         LOGGER.exception(error)
