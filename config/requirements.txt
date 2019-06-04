@@ -1,8 +1,9 @@
 ###### Requirements without Version Specifiers ######
-requests
 nltk
-Counter
 string
+collections
+logging
+os
 
 
 ###### Requirements with Version Specifiers ######

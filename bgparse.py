@@ -14,14 +14,9 @@ def nltk_parse(data):
     :str required:
     """
 
-    from nltk import word_tokenize, bigrams, FreqDist
+    from nltk import bigrams, word_tokenize, FreqDist
 
-
-    tokens = word_tokenize(data)
-    bigrams = bigrams(tokens)
-    fdist = FreqDist(bigrams)
-
-    return fdist
+    return FreqDist(bigrams(word_tokenize(data)))
 
 def bigram_parse(data):
 
@@ -32,15 +27,16 @@ def bigram_parse(data):
 
     from collections import Counter
 
-    input_list = data.split(' ')
-    bigrams = zip(input_list, input_list[1:])
     count = Counter()
-    for element in bigrams:
+
+    input_list = data.split(' ')
+    zip_bigrams = zip(input_list, input_list[1:])
+    for element in zip_bigrams:
         count[element] += 1
 
     return count
 
-def filter_punkt(raw_data):
+def filter_punkt_lower(raw_data):
 
     """
     apply lower case
@@ -73,7 +69,6 @@ def filter_punkt(raw_data):
     lower_str = raw_data.lower()
     special_char = '\u200e'
     punct = string.punctuation
-
     new_str = lower_str.translate(str.maketrans('', '', punct)).replace(special_char, '')
 
     return new_str

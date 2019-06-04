@@ -10,9 +10,6 @@ RUN SCRIPTS
 3.
 """
 
-import argparse
-
-
 def cmd_line_input():
 
     """
@@ -42,14 +39,14 @@ def cmd_line_input():
     parser = argparse.ArgumentParser(description='Comand line parse for input options',
                                      add_help=False)
 
-    parser.add_argument('-h',
-                        '--help',
-                        action='help',
+    parser.add_argument("-h",
+                        "--help",
+                        action="help",
                         help=help_msg
                         )
     parser.add_argument("-f",
-                        "--files",
-                        nargs='+',
+                        "--file",
+                        dest="file",
                         required=True,  # required for now
                         help="""set a file target ex.
                         -f path/file.txt path/file2.txt etc
@@ -62,42 +59,32 @@ def cmd_line_input():
                         -u google.com somesite.com etc
                         You can set one or as many as you like"""
                         )
+    # parser.add_argument("-t",
+    #                     "--test",
+    #                     action='store_true',
+    #                     help='include this flag to run testing with -f <path>'
+    #                     )
 
     return parser.parse_args()
 
 
-def file_to_grams(files):
+def read_file(file):
 
     """
     Load a file
-    Filter punctuation
-    Call nltk_parse on the raw text
-    How do we want to handle this for input
+    How do we want to handle this for input?
+    # This should be turned into a generator [Future]
     """
 
-    for file in files:
-        # possible split here to conncurency considerations (FUTURE)
-        # noticable behavior difference when handling LTR (INVESTIGATING)
-
-        try:
-            text = open(file).read()
-            if isinstance(text, str):
-                no_punct_text = bgparse.filter_punkt(text)
-                nice_print(bgparse.nltk_parse(no_punct_text))
-                nice_print(bgparse.bigram_parse(no_punct_text))
-            else:
-                pass
-        except Exception as error:
-            print('something went wrong reading your file', end='')
-            print(error)
-            pass
-        # except UnicodeEncodeError as error:
-        #     print(error)
+    return open(file).read()
+    # except UnicodeEncodeError as error:
+    #     print(error)
 
 def nice_print(results):
 
     """
-    print it nice and neat
+    Put the pick in there, Pete, and turn it round real neat.
+    Presentation is everything...
 
     :dict required:
 
@@ -112,10 +99,31 @@ def nice_print(results):
 
 if __name__ == '__main__':
 
+    import argparse
+    import bgparse
+    import logging
+    import os
+
+    LOG_FILE = ''.join([os.getcwd(), 'bigramft.log'])
+    LOGGER = logging.getLogger(__name__)
+    logging.basicConfig(level=logging.DEBUG,
+                        filename=LOG_FILE,
+                        filemode='w',  # over write for single use currently default is append
+                        format='%(asctime)s : %(name)s - %(levelname)s - %(message)s')
+    logging.warning('This will get logged to a file')
+
     try:
-        import bgparse
 
         ARGS = cmd_line_input()
-        file_to_grams(ARGS.files)
+        TEXT = read_file(ARGS.file)
+
+        NO_PUNCT = bgparse.filter_punkt_lower(TEXT)
+        NLTK_RETURN = bgparse.nltk_parse(NO_PUNCT)
+        NON_NLTK_RETURN = bgparse.bigram_parse(NO_PUNCT)
+
+        nice_print(NLTK_RETURN)
+        nice_print(NON_NLTK_RETURN)
+
     except Exception as error:
-        print(error, '\n', 'Plese see the help message for usage tips')
+        LOGGER.exception(error)
+        print(f'{error} : Plese see the help message for usage tips or check the log')
