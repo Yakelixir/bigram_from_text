@@ -31,6 +31,13 @@ Argparse ineraction [-f required]
 
 
 
+TESTING
+
+1. python test_bigramft.py
+
+unittests
+
+
 DEVELOPMENT NOTES
 
     """
