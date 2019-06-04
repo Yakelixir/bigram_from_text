@@ -18,8 +18,7 @@ Actiavte the virtual environment
 4. ./nltk_setup.py
 
 This will run nltk.download('all') which is recomended for setup
-
-4. You should be ready for beer and pixie sticks now
+You should be ready for beer and pixie sticks now
 
 
 
@@ -35,7 +34,8 @@ TESTING
 
 1. python test_bigramft.py
 
-unittests
+unittests from $PWD/test_bigramft.py
+
 
 
 DEVELOPMENT NOTES
